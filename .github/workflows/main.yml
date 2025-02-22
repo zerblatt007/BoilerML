@@ -1,4 +1,4 @@
-name: Build and Push Docker Image with xcompile
+name: Build and Push Docker Image with xcompile for RPI
 
 on:
   push:
