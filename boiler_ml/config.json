@@ -1,0 +1,17 @@
+{
+  "name": "BoilerML",
+  "version": "1.0.0",
+  "slug": "boiler_ml",
+  "description": "Home Assistant add-on for optimizing boiler operation.",
+  "arch": ["aarch64"],
+  "startup": "once",
+  "boot": "manual",
+  "options": {
+    "hass_token": "REPLACE_WITH_SECRET"
+  },
+  "schema": {
+    "hass_token": "str"
+  },
+  "image": "ghcr.io/zerblatt007/boiler_ml-aarch64"
+}
+
