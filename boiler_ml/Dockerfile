@@ -1,22 +1,15 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.0.4
-FROM $BUILD_FROM
-
-ENV LANG C.UTF-8
+# Use a base Python image
+FROM python:3.12
 
 # Install dependencies
-RUN apk add --no-cache python3 py3-pip
+RUN pip install --no-cache-dir scikit-learn joblib numpy
 
-# Copy add-on files
+# Copy your script to the container
+COPY boiler_ml.py /app/boiler_ml.py
+
+# Set the working directory
 WORKDIR /app
-COPY run.sh .
-COPY boiler_ml.py .
 
-# Install Python packages
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r /app/requirements.txt
-
-# Set permissions
-RUN chmod +x /app/run.sh
-
-CMD [ "/app/run.sh" ]
+# Run the Python script when the container starts
+CMD ["python", "boiler_ml.py"]
 
