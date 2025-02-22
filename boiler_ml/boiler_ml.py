@@ -13,7 +13,7 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 
-MODEL_PATH = "/app/model.pkl"  # Adjust if needed
+MODEL_PATH = "/app/models/boiler_ml_model_f2.pkl"  # Adjust if needed
 
 def get_sensor_data():
     """Fetch sensor data from Home Assistant."""
