@@ -5,7 +5,7 @@ FROM python:3.12
 RUN pip install --no-cache-dir scikit-learn joblib numpy
 
 # Copy your script to the container
-COPY boiler_ml.py /app/boiler_ml.py
+COPY noiler_ml/boiler_ml.py /app/boiler_ml.py
 
 # Set the working directory
 WORKDIR /app
