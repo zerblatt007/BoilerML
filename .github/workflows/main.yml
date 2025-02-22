@@ -26,13 +26,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build and push multi-platform image
+      - name: Build and push aarch64 image
         uses: docker/build-push-action@v3
         with:
-          context: ./boiler_ml  # Adjusted to your folder
+          context: .
           push: true
           tags: ghcr.io/zerblatt007/boiler_ml-aarch64:latest
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/aarch64
           secrets: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
