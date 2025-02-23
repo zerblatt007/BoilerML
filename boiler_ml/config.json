@@ -8,10 +8,10 @@
   "boot": "manual",
   "options": {
     "hass_token": "REPLACE_WITH_SECRET",
-    "ha_url": "http://homeassistant.local:8123"
+    "ha_url": "http://localhost:8123"
   },
   "schema": {
-    "hass_token": "str"
+    "hass_token": "str",
     "ha_url": "str"
   },
   "image": "ghcr.io/zerblatt007/boiler_ml-aarch64"
