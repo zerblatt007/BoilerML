@@ -11,7 +11,7 @@
   "homeassistant_api": true,
   "options": {
     "hass_token": "!secret hass_token",
-    "ha_url": "http://supervisor/core"
+    "ha_url": "https://hassio.local:8123/"
   },
   "schema": {
     "hass_token": "str",
