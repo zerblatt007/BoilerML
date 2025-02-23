@@ -8,6 +8,8 @@ import numpy as np
 # Fetch HA URL from environment or add-on config (default if not specified)
 HA_URL = os.getenv('HA_URL', 'http://homeassistant.local:8123')  # Default value if not configured
 
+print(f"Using HA_URL: {HA_URL}")  # Debugging output
+
 # Load Home Assistant token from secrets
 TOKEN = os.getenv("HASS_TOKEN")  # Load from environment variable
 
