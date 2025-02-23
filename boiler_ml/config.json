@@ -7,7 +7,7 @@
   "startup": "once",
   "boot": "manual",
   "options": {
-    "hass_token": "REPLACE_WITH_SECRET"
+    "hass_token": "REPLACE_WITH_SECRET",
     "ha_url": "http://homeassistant.local:8123"
   },
   "schema": {
