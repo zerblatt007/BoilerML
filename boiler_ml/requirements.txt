@@ -2,4 +2,4 @@ requests
 numpy
 scikit-learn
 joblib
-
+homeassistant

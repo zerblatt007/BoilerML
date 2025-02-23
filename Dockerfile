@@ -2,7 +2,9 @@
 FROM python:3.12
 
 # Install dependencies
-RUN pip install --no-cache-dir scikit-learn joblib numpy requests
+#RUN pip install --no-cache-dir scikit-learn joblib numpy requests homeassistant
+COPY boiler_ml/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy your script to the container
 COPY boiler_ml/boiler_ml.py /app/boiler_ml.py
