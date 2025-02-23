@@ -9,5 +9,6 @@
   "options": {},
   "schema": {}
   "maintainer": "zerblatt007"
+  "image": "ghcr.io/zerblatt007/boiler_ml-aarch64:1.0.0"
 }
 
