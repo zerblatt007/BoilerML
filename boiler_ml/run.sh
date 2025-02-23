@@ -8,10 +8,6 @@ HA_URL=$(jq --raw-output '.ha_url' /data/options.json)
 # Export HA_URL so it is available in Python
 export HA_URL
 
-# Debugging: Print values (remove these after testing)
-echo "TOKEN: $TOKEN"
-echo "HA_URL: $HA_URL"
-
 # Run your script
 python3 /app/boiler_ml.py "$TOKEN"
 

@@ -6,9 +6,12 @@
   "arch": ["aarch64"],
   "startup": "application",
   "boot": "manual",
+  "host_network": true,
+  "privileged": ["NET_ADMIN"],
+  "homeassistant_api": true,
   "options": {
     "hass_token": "!secret hass_token",
-    "ha_url": "http://localhost:8123"
+    "ha_url": "http://supervisor/core"
   },
   "schema": {
     "hass_token": "str",
