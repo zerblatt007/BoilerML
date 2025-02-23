@@ -2,7 +2,7 @@
 FROM python:3.12
 
 # Install dependencies
-RUN pip install --no-cache-dir scikit-learn joblib numpy
+RUN pip install --no-cache-dir scikit-learn joblib numpy requests
 
 # Copy your script to the container
 COPY boiler_ml/boiler_ml.py /app/boiler_ml.py
