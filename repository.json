@@ -1,14 +1,6 @@
 {
   "name": "BoilerML Add-ons",
-  "slug": "boiler_ml",  
-  "description": "Machine Learning add-on for boiler optimization",
-  "arch": ["aarch64"],  
-  "version": "1.0.0",  
   "url": "https://github.com/zerblatt007/BoilerML",  
-  "startup": "system",  
-  "options": {},
-  "schema": {}
   "maintainer": "zerblatt007"
-  "image": "ghcr.io/zerblatt007/boiler_ml-aarch64:1.0.0"
 }
 
