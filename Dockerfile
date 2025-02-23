@@ -13,6 +13,8 @@ COPY boiler_ml/models/boiler_ml_model_f2.pkl /app/models/boiler_ml_model_f2.pkl
 # Set the working directory
 WORKDIR /app
 
+ENV HA_URL=${HA_URL}
+
 # Run the Python script when the container starts
 CMD ["python", "boiler_ml.py"]
 

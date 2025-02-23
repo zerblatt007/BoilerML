@@ -4,10 +4,11 @@
   "slug": "boiler_ml",
   "description": "Home Assistant add-on for optimizing boiler operation.",
   "arch": ["aarch64"],
-  "startup": "once",
+  "startup": "application",
   "boot": "manual",
   "options": {
     "hass_token": "REPLACE_WITH_SECRET"
+    "ha_url": "http://homeassistant.local:8123"
   },
   "schema": {
     "hass_token": "str"
