@@ -6,6 +6,8 @@
   "arch": ["aarch64"],
   "startup": "application",
   "boot": "manual",
+  "ingress": false,
+  "ingress_port": null,
   "host_network": true,
   "privileged": ["NET_ADMIN"],
   "homeassistant_api": true,
