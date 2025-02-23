@@ -38,7 +38,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/zerblatt007/boiler_ml-aarch64:latest
+          tags: |
+            ghcr.io/zerblatt007/boiler_ml-aarch64:latest
+            ghcr.io/zerblatt007/boiler_ml-aarch64:1.0.0
           platforms: linux/aarch64
           secrets: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
