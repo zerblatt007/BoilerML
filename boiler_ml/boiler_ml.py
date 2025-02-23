@@ -6,7 +6,7 @@ import numpy as np
 #from homeassistant.const import CONF_URL
 
 # Fetch HA URL from environment or add-on config (default if not specified)
-HA_URL = os.getenv('HA_URL', 'http://homeassistant.local:8123')  # Default value if not configured
+HA_URL = os.getenv('HA_URL', 'http://localhost:8123')  # Default value if not configured
 
 print(f"Using HA_URL: {HA_URL}")  # Debugging output
 
