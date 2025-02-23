@@ -16,9 +16,6 @@ COPY boiler_ml/models/boiler_ml_model_f2.pkl /app/models/boiler_ml_model_f2.pkl
 COPY README.md /app/README.md
 COPY boiler_ml/README.md /app/boiler_ml/README.md
 
-# Pass the ha_url to the container
-ENV HA_URL=${HA_URL}
-
 # Set the working directory
 WORKDIR /app
 
