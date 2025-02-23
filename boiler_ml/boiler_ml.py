@@ -3,7 +3,7 @@ import json
 import os
 import joblib  # Ensure this is installed
 import numpy as np
-from homeassistant.const import CONF_URL
+#from homeassistant.const import CONF_URL
 
 # Fetch HA URL from environment or add-on config (default if not specified)
 HA_URL = os.getenv('HA_URL', 'http://homeassistant.local:8123')  # Default value if not configured
