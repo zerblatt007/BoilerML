@@ -43,3 +43,9 @@ jobs:
           secrets: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
+      - name: Retag and push 1.0.0
+        run: |
+          docker pull ghcr.io/zerblatt007/boiler_ml-aarch64:latest
+          docker tag ghcr.io/zerblatt007/boiler_ml-aarch64:latest ghcr.io/zerblatt007/boiler_ml-aarch64:1.0.0
+          docker push ghcr.io/zerblatt007/boiler_ml-aarch64:1.0.0
+
