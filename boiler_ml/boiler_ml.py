@@ -18,9 +18,14 @@ HEADERS = {
 
 MODEL_PATH = "/app/models/boiler_ml_model_f2.pkl"  # Adjust if needed
 
+# Fetch sensor data from Home Assistant
+ENTITY_INPUT_ID = "sensor.custom_nordpool_today"
+# Push sensor data to Home Assistant
+ENTITY_OUTPUT_ID = "sensor.boiler_off_time"
+
 def get_sensor_data():
     """Fetch sensor data from Home Assistant."""
-    response = requests.get(f"{HA_URL}/api/states/sensor.power_price", headers=HEADERS)
+    response = requests.get(f"{HA_URL}/api/states/ENTITY_INPUT_ID", headers=HEADERS)
     if response.status_code == 200:
         return float(response.json()["state"])
     else:
@@ -33,7 +38,7 @@ def post_result(value):
         "state": value,
         "attributes": {"unit_of_measurement": "off_time"}
     }
-    response = requests.post(f"{HA_URL}/api/states/sensor.boiler_off_time", headers=HEADERS, data=json.dumps(payload))
+    response = requests.post(f"{HA_URL}/api/states/ENTITY_OUTPUT_ID", headers=HEADERS, data=json.dumps(payload))
     print(f"Post response: {response.status_code} {response.text}")
 
 def predict_off_time(price):
