@@ -3,18 +3,16 @@ import json
 import os
 import joblib  # Ensure this is installed
 import numpy as np
-#from homeassistant.const import CONF_URL
 
 # Fetch HA URL from environment or add-on config (default if not specified)
 HA_URL = os.getenv('HA_URL', 'https://hassio.local:8123/')  # Default value if not configured
+HASS_TOKEN = os.getenv("HASS_TOKEN")  # Should be set by run.sh
 
 print(f"Using HA_URL: {HA_URL}")  # Debugging output
-
-# Load Home Assistant token from secrets
-TOKEN = os.getenv("HASS_TOKEN")  # Load from environment variable
+print(f"HASS_TOKEN: {HASS_TOKEN[:6]}... (truncated)")  # Debugging output (DO NOT print full token!)
 
 HEADERS = {
-    "Authorization": f"Bearer {TOKEN}",
+    "Authorization": f"Bearer {HASS_TOKEN}",
     "Content-Type": "application/json"
 }
 
@@ -22,6 +20,7 @@ MODEL_PATH = "/app/models/boiler_ml_model_f2.pkl"  # Adjust if needed
 
 # Fetch sensor data from Home Assistant
 ENTITY_INPUT_ID = "sensor.custom_nordpool_today"
+
 # Push sensor data to Home Assistant
 ENTITY_OUTPUT_ID = "sensor.boiler_off_time"
 
