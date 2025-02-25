@@ -4,6 +4,9 @@ FROM python:3.12
 # Set the working directory in the container
 WORKDIR /app
 
+# Install system dependencies (including jq)
+RUN apt-get update && apt-get install -y jq
+
 # Copy all files and subdirectories from boiler_ml to /app
 COPY boiler_ml /app/
 
