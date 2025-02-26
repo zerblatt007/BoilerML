@@ -54,6 +54,7 @@ def predict_off_time(today_state):
     """Use ML model to determine optimal boiler off time for each hour."""
     model = joblib.load(MODEL_PATH)
     spikeList = [0] * 24  # Initialize list with zeros
+    spikeHours = []  # List to store timestamps for each hour
 
     # Predict shutdown hours
     for hour in range(24):
@@ -74,8 +75,10 @@ def predict_off_time(today_state):
         prediction = model.predict(features)[0]  # Predict shutdown (1) or not (0)
         spikeList[hour] = today_state[hour] if prediction == 1 else 0
 
-    return spikeList
+        # Generate timestamp (ISO format) for each hour
+        spikeHours.append((np.datetime64('today') + np.timedelta64(hour, 'h')).astype(str))
 
+    return {"spikeList": spikeList, "spikeHours": spikeHours}
 
 if __name__ == "__main__":
     price = get_sensor_data()
