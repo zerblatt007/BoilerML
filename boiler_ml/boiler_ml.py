@@ -1,6 +1,8 @@
 import requests
 import json
 import os
+import pytz
+from datetime import datetime, timedelta
 import joblib  # Ensure this is installed
 import numpy as np
 
@@ -60,6 +62,10 @@ def predict_off_time(today_state):
     spikeList = [0] * 24  # Initialize list with zeros
     spikeHours = []  # List to store timestamps for each hour
 
+    # Set timezone to Europe/Oslo
+    oslo_tz = pytz.timezone('Europe/Oslo')
+
+
     # Predict shutdown hours
     for hour in range(24):
         features = [hour, today_state[hour]]
@@ -79,8 +85,9 @@ def predict_off_time(today_state):
         prediction = model.predict(features)[0]  # Predict shutdown (1) or not (0)
         spikeList[hour] = today_state[hour] if prediction == 1 else 0
 
-        # Generate timestamp (ISO format) for each hour
-        spikeHours.append((np.datetime64('today') + np.timedelta64(hour, 'h')).astype(str))
+        # Generate timestamp with correct format and timezone
+        current_time = (datetime.now() + timedelta(hours=hour)).replace(tzinfo=oslo_tz)
+        spikeHours.append(current_time.strftime('%Y-%m-%dT%H:%M:%S%z'))
 
     return {"spikeList": spikeList, "spikeHours": spikeHours}
 
