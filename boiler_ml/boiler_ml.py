@@ -57,11 +57,25 @@ def predict_off_time(today_state):
 
     # Predict shutdown hours
     for hour in range(24):
-        features = np.array([[hour, today_state[hour]]])  # Match training features
+        features = [hour, today_state[hour]]
+
+        # Include past and future prices
+        if hour > 0:
+            features.append(today_state[hour - 1])  # Previous hour price
+        else:
+            features.append(today_state[hour])  # Use current hour if no previous hour
+
+        if hour < 23:
+            features.append(today_state[hour + 1])  # Next hour price
+        else:
+            features.append(today_state[hour])  # Use current hour if no next hour
+
+        features = np.array([features])  # Reshape for model input
         prediction = model.predict(features)[0]  # Predict shutdown (1) or not (0)
         spikeList[hour] = today_state[hour] if prediction == 1 else 0
 
     return spikeList
+
 
 if __name__ == "__main__":
     price = get_sensor_data()
