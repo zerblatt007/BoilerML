@@ -25,10 +25,18 @@ ENTITY_INPUT_ID = "sensor.custom_nordpool_today"
 ENTITY_OUTPUT_ID = "sensor.boiler_off_time"
 
 def get_sensor_data():
-    """Fetch sensor data from Home Assistant."""
+    """Fetch sensor data from Home Assistant and return today's prices."""
     response = requests.get(f"{HA_URL}/api/states/{ENTITY_INPUT_ID}", headers=HEADERS, verify=False)
+    
     if response.status_code == 200:
-        return float(response.json()["state"])
+        data = response.json()
+        today_prices = data.get("attributes", {}).get("today", None)  # Safely extract "today"
+        
+        if today_prices is not None:
+            return today_prices  # Return the list of today's prices
+        else:
+            print("Error: 'today' data not found in response.")
+            return None
     else:
         print(f"Failed to get sensor data: {response.text}")
         return None
@@ -42,11 +50,18 @@ def post_result(value):
     response = requests.post(f"{HA_URL}/api/states/{ENTITY_OUTPUT_ID}", headers=HEADERS, data=json.dumps(payload), verify=False)
     print(f"Post response: {response.status_code} {response.text}")
 
-def predict_off_time(price):
-    """Use ML model to determine optimal boiler off time."""
+def predict_off_time(today_state):
+    """Use ML model to determine optimal boiler off time for each hour."""
     model = joblib.load(MODEL_PATH)
-    prediction = model.predict(np.array([[price]]))
-    return round(prediction[0], 2)
+    spikeList = [0] * 24  # Initialize list with zeros
+
+    # Predict shutdown hours
+    for hour in range(24):
+        features = np.array([[hour, today_state[hour]]])  # Match training features
+        prediction = model.predict(features)[0]  # Predict shutdown (1) or not (0)
+        spikeList[hour] = today_state[hour] if prediction == 1 else 0
+
+    return spikeList
 
 if __name__ == "__main__":
     price = get_sensor_data()
