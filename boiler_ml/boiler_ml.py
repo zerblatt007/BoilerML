@@ -41,11 +41,15 @@ def get_sensor_data():
         print(f"Failed to get sensor data: {response.text}")
         return None
 
-def post_result(value):
-    """Post ML result to a new sensor in HA."""
+def post_result(result):
+    """Post ML result (spikeList and spikeHours) to a new sensor in HA."""
     payload = {
-        "state": value,
-        "attributes": {"unit_of_measurement": "off_time"}
+        "state": "updated",  # Just a placeholder state
+        "attributes": {
+            "spikeList": result["spikeList"],
+            "spikeHours": result["spikeHours"],
+            "unit_of_measurement": "off_time"
+        }
     }
     response = requests.post(f"{HA_URL}/api/states/{ENTITY_OUTPUT_ID}", headers=HEADERS, data=json.dumps(payload), verify=False)
     print(f"Post response: {response.status_code} {response.text}")
