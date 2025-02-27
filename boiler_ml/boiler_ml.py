@@ -18,7 +18,7 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 
-MODEL_PATH = "/app/models/boiler_ml_model_f2.pkl"  # Adjust if needed
+MODEL_PATH = "/app/models/boiler_ml_model_f4.pkl"  # Adjust if needed
 
 # Fetch sensor data from Home Assistant
 ENTITY_INPUT_ID = "sensor.custom_nordpool_today"
