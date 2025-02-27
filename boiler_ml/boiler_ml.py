@@ -65,6 +65,8 @@ def predict_off_time(today_state):
     # Set timezone to Europe/Oslo
     oslo_tz = pytz.timezone('Europe/Oslo')
 
+    # Get today's date at 00:00 in Oslo timezone
+    today_midnight = datetime.now(oslo_tz).replace(hour=0, minute=0, second=0, microsecond=0)
 
     # Predict shutdown hours
     for hour in range(24):
@@ -85,9 +87,9 @@ def predict_off_time(today_state):
         prediction = model.predict(features)[0]  # Predict shutdown (1) or not (0)
         spikeList[hour] = today_state[hour] if prediction == 1 else 0
 
-        # Generate timestamp with correct format and timezone
-        current_time = (datetime.now() + timedelta(hours=hour)).replace(tzinfo=oslo_tz)
-        spikeHours.append(current_time.strftime('%Y-%m-%dT%H:%M:%S%z'))
+        # Generate timestamp for each hour
+        spike_time = today_midnight + timedelta(hours=hour)
+        spikeHours.append(spike_time.strftime('%Y-%m-%dT%H:%M:%S%z'))
 
     return {"spikeList": spikeList, "spikeHours": spikeHours}
 
